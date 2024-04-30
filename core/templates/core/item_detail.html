@@ -1,0 +1,16 @@
+<div>
+    <div class='fixed'>
+    <button _="on click 
+    transition #item-detail-container's opacity to 0 over 300ms then
+    remove .show from #item-detail-container" 
+    class='border-2 border-black rounded-full hover:border-gray-400 hover:text-gray-400 p-2 px-4 active:border-gray-500 active:text-gray-500'>X</button>
+    </div>
+    <div class='lg:flex lg:flex-row justify-between items-center'>
+        <h2 class='font-bold text-4xl mx-60'>{{ item.title }}</h2>
+        <img src="{{ item.image.url }}" alt="{{ item.title }}" class='h-auto w-80 rounded-3xl mx-40'>
+    </div>
+    <p class="text-lg">{{ item.body }}a</p>
+    <div class='p-20'>
+        <p class='text-sm text-gray-600'>Posted: {{ item.created_at|date:"d/m/Y" }}</p>
+    </div>
+</div>
