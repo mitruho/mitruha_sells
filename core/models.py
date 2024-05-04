@@ -5,7 +5,7 @@ class Item(models.Model):
     image = models.ImageField(upload_to='Items/', default='Items/default.png')
     body = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
-    active = models.BooleanField()
+    active = models.BooleanField(default=True)
     price = models.IntegerField()
 
     def __str__(self):
