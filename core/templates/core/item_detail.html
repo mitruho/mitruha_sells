@@ -13,4 +13,7 @@
     <div class='p-20'>
         <p class='text-sm text-gray-600'>Posted: {{ item.created_at|date:"d/m/Y" }}</p>
     </div>
+    {% if not item.active %}
+    <h1>SOLD!</h1>
+    {% endif %}
 </div>
