@@ -10,6 +10,9 @@ def index(request):
     context = {'page_obj': page_obj}
     return render(request, 'core/index.html', context=context)
 
+def about(request):
+    return render(request, 'core/about.html')
+
 class ItemDetailView(DetailView):
     model = Item
     template_name = 'core/item_detail.html'

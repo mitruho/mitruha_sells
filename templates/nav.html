@@ -1,9 +1,9 @@
 <nav class='bg-white border-black border-1 rounded-xl shadow-[0px_0px_3px_5px_rgba(0,0,0,0.75)] m-5'>
-    <ul class='flex justify-around'>
-        <div class='inline-flex gap-10'>
-            <li>Home</li>
+    <ul class='flex justify-between px-5 py-2'>
+        <div class='inline-flex gap-10 text-xl font-bold'>
+            <li><a href="{% url 'index' %}">Home</a></li>
             <li>Support</li>
-            <li>About</li>
+            <li><a href="{% url 'about' %}">About</a></li>
         </div>
         <li class='mr-0 pr-0'>Me</li>
     </ul>
