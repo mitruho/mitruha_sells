@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import Item
+from .models import Item, AboutPage
 from django.core.paginator import Paginator
 from django.views.generic.detail import DetailView
 
@@ -10,8 +10,10 @@ def index(request):
     context = {'page_obj': page_obj}
     return render(request, 'core/index.html', context=context)
 
-def about(request):
-    return render(request, 'core/about.html')
+def about_view(request):
+    about_content = AboutPage.objects.first()  # assumes there is at least one entry
+    context = {'about_content': about_content}
+    return render(request, 'core/about.html', context=context)
 
 class ItemDetailView(DetailView):
     model = Item
