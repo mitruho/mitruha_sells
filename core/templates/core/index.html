@@ -5,63 +5,38 @@ Mitruha sells
 {% endblock title %}
 
 {% block content %}
-<div class='grid xl:grid-cols-4 gap-20 max-[1279px]:grid-cols-2 max-[800px]:grid-cols-1 mx-5 gap-2 justify-items-center' id="items">
+<div class='flex flex-wrap justify-center gap-5 mx-5' id="items">
     {% for item in page_obj %}
-        {% if item.active %}
-            <a href="/items/{{ item.id }}" 
-            class='bg-lime-200 rounded-3xl text-center row-span-2 p-10 
-            border-2 transition-colors hover:border-gray-400 active:border-gray-500 border-black 
-            max-w-64 min-h-64 item opacity-0 
-            shadow-[0px_0px_3px_5px_rgba(0,0,0,0.75)] transition-shadow hover:shadow-[0px_0px_2px_4px_rgba(0,0,0,0.75)] active:shadow-none 
-            hover:text-gray-700 active:text-gray-500
-            hover:bg-white active:bg-lime-50'
-                hx-get="/items/{{ item.id }}"
-                hx-target="#item-detail-container"
-                hx-swap="innerHTML"
-                hx-trigger="click"
-                _="on click 
-                    add .show to #item-detail-container
-                    then transition #item-detail-container's opacity to 1 over 300ms
-                on intersection(intersecting) having threshold 0.1
-                    if intersecting transition opacity to 1 over 200ms">
-        {% else %}
-            <a href="/items/{{ item.id }}" 
-            class='bg-lime-100 rounded-3xl text-center row-span-2 p-10 
-            border-2 transition-colors hover:border-gray-400 active:border-gray-500 border-black 
-            max-w-64 min-h-64 item opacity-0
-            text-gray-500
-            shadow-[0px_0px_2px_4px_rgba(0,0,0,0.75)] transition-shadow hover:shadow-[0px_0px_1px_2px_rgba(0,0,0,0.75)] active:shadow-none 
-            hover:text-gray-400 active:text-gray-300
-            hover:bg-white active:bg-lime-50'
-                hx-get="/items/{{ item.id }}"
-                hx-target="#item-detail-container"
-                hx-swap="innerHTML"
-                hx-trigger="click"
-                _="on click 
-                    add .show to #item-detail-container
-                    then transition #item-detail-container's opacity to 1 over 300ms
-                on intersection(intersecting) having threshold 0.1
-                    if intersecting transition opacity to 1 over 200ms">
-        {% endif %}
-            <h2 class='font-bold text-3xl'>{{ item.title }}</h2>
-            <img src="{{ item.image.url }}" alt="{{ item.title }}" class='h-auto w-36 mx-auto rounded-3xl'>
+        <a href="/items/{{ item.id }}" 
+           class="{% if item.active %}bg-lime-200{% else %}bg-lime-100 text-gray-500{% endif %} rounded-3xl text-center p-5 border-2 transition-colors hover:border-gray-400 active:border-gray-500 border-black w-64 h-80 item opacity-0 shadow-md hover:shadow-lg active:shadow-none hover:text-gray-700 active:text-gray-500 hover:bg-white active:bg-lime-50 flex flex-col items-center justify-between"
+           hx-get="/items/{{ item.id }}"
+           hx-target="#item-detail-container"
+           hx-swap="innerHTML"
+           hx-trigger="click"
+           _="on click 
+                  add .show to #item-detail-container
+                  then transition #item-detail-container's opacity to 1 over 300ms
+              on intersection(intersecting) having threshold 0.1
+                  if intersecting transition opacity to 1 over 200ms">
+            <h2 class='font-bold text-2xl truncate w-full'>{{ item.title }}</h2>
+            <img src="{{ item.image.url }}" alt="{{ item.title }}" class='h-32 w-32 object-cover rounded-3xl'>
             {% if item.active %}
-                <p class="font-semibold text-2xl">{{ item.price }}€</p>
+                <p class="font-semibold text-xl">{{ item.price }}€</p>
             {% else %}
-                <p class="font-semibold text-2xl">SOLD!</p>
+                <p class="font-semibold text-xl">SOLD!</p>
             {% endif %}
             {% if page_obj.has_next and forloop.last %}
-            <span hx-get="{% url 'index' %}?page={{ page_obj.next_page_number }}"
-                hx-swap="beforeend" 
-                hx-target="#items" 
-                hx-select=".item"
-                hx-trigger="revealed">
-            </span>
+                <span hx-get="{% url 'index' %}?page={{ page_obj.next_page_number }}"
+                      hx-swap="beforeend" 
+                      hx-target="#items" 
+                      hx-select=".item"
+                      hx-trigger="revealed">
+                </span>
             {% endif %}
         </a>
     {% endfor %}
 </div>
 <div id="item-detail-container" 
-class="bg-white fixed inset-x-0 inset-y-0 m-10 z-50 overflow-y-auto p-5 hidden rounded-3xl border-2 border-black opacity-0 shadow-[0px_0px_3px_5px_rgba(0,0,0,0.75)]">
+     class="bg-white fixed inset-x-0 inset-y-0 m-10 z-50 overflow-y-auto p-5 hidden rounded-3xl border-2 border-black opacity-0 shadow-lg">
 </div>
 {% endblock content %}
